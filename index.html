@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ลงทะเบียน - วัยสุขสันต์ ใจผูกพัน</title>
+
+    <!-- Google Fonts: Prompt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Prompt', Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #a2d244 0%, #4e9f27 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #2d3748;
+        }
+
+        .container {
+            background: #fdfbf7; /* ครีมกระดาษโน้ต */
+            padding: 30px 25px;
+            width: 100%;
+            max-width: 380px;
+            border-radius: 24px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.18), 0 4px 10px rgba(0,0,0,0.08);
+            border: 4px solid #ffffff;
+            position: relative;
+        }
+
+        /* Banner หัวข้อ อ้างอิงจากรูปภาพ */
+        .header-banner {
+            background: #f4eee1;
+            padding: 16px 12px;
+            border-radius: 16px;
+            border: 1px dashed #c2b59b;
+            text-align: center;
+            margin-bottom: 22px;
+        }
+
+        .header-banner h1 {
+            margin: 0;
+            color: #2d241e;
+            font-size: 26px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .header-banner .subtitle {
+            margin-top: 6px;
+            color: #52473f;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        label {
+            display: block;
+            margin-top: 14px;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #3b422a;
+            font-size: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #d2e3c8;
+            border-radius: 12px;
+            font-size: 16px;
+            background-color: #ffffff;
+            transition: all 0.2s ease;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #4e9f27;
+            box-shadow: 0 0 0 3px rgba(78, 159, 39, 0.2);
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-register {
+            background: linear-gradient(180deg, #52a926 0%, #3e881c 100%);
+            color: white;
+            margin-top: 22px;
+            box-shadow: 0 4px 12px rgba(62, 136, 28, 0.35);
+        }
+
+        .btn-register:hover {
+            background: linear-gradient(180deg, #46961f 0%, #337316 100%);
+            transform: translateY(-1px);
+        }
+
+        .btn-register:active {
+            transform: translateY(1px);
+        }
+
+        .list-button {
+            background: #796e65;
+            color: white;
+            margin-top: 10px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+        }
+
+        .list-button:hover {
+            background: #61574f;
+        }
+
+        .footer-text {
+            text-align: right;
+            font-size: 12px;
+            color: #8c8275;
+            margin-top: 18px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header-banner">
+        <h1>วัยสุขสันต์<br>ใจผูกพัน</h1>
+        <div class="subtitle">ณ ศูนย์สันทนาการและฟื้นฟูผู้สูงอายุบึงยี่โถ</div>
+    </div>
+
+    <label for="name">ชื่อผู้สูงอายุ</label>
+    <input type="text" id="name" placeholder="กรอกชื่อ-นามสกุล">
+
+    <label for="age">อายุ</label>
+    <input type="number" id="age" placeholder="กรอกอายุ (ปี)">
+
+    <label for="score">คะแนนที่คาดว่าจะทำได้ (เต็ม 5)</label>
+    <input type="number" id="score" min="0" max="5" step="0.5" placeholder="กรอกคะแนน (0 - 5)">
+
+    <button class="btn-register" onclick="register()">ลงทะเบียน</button>
+
+    <button class="list-button" onclick="location.href='namelist.html'">
+        ดูรายชื่อผู้ลงทะเบียน
+    </button>
+
+    <div class="footer-text">
+        ห้องย่อย 14 กลุ่ม 4
+    </div>
+
+</div>
+
+<script>
+function register() {
+
+    const name = document.getElementById("name").value.trim();
+    const age = document.getElementById("age").value.trim();
+    const score = document.getElementById("score").value.trim();
+
+    if (name === "" || age === "" || score === "") {
+        alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+        return;
+    }
+
+    const scoreVal = parseFloat(score);
+    if (isNaN(scoreVal) || scoreVal < 0 || scoreVal > 5) {
+        alert("กรุณากรอกคะแนนระหว่าง 0 ถึง 5");
+        return;
+    }
+
+    const now = new Date();
+
+    const dateTime = now.toLocaleString("th-TH", {
+        dateStyle: "short",
+        timeStyle: "medium"
+    });
+
+    const elderly = {
+        name: name,
+        age: age,
+        score: scoreVal,
+        time: dateTime
+    };
+
+    let list = JSON.parse(localStorage.getItem("elderlyList")) || [];
+
+    list.push(elderly);
+
+    localStorage.setItem("elderlyList", JSON.stringify(list));
+
+    // บันทึก Index ของผู้ใช้ล่าสุด
+    localStorage.setItem("currentUserIndex", list.length - 1);
+
+    alert("ลงทะเบียนเรียบร้อยแล้ว");
+
+    // นำผู้ใช้ไปยังหน้า RememberGameEasy.html
+    window.location.href = "RememberGameEasy.html";
+}
+</script>
+
+</body>
+</html>
